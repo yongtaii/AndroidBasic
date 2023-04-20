@@ -1,6 +1,9 @@
+import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
+
 plugins {
     id ("com.android.application")
     id ("org.jetbrains.kotlin.android")
+    kotlin("kapt")
 }
 
 android {
@@ -35,11 +38,39 @@ android {
 
 dependencies {
 
-    implementation ("androidx.core:core-ktx:1.7.0")
-    implementation ("androidx.appcompat:appcompat:1.4.1")
-    implementation ("com.google.android.material:material:1.5.0")
-    implementation ("androidx.constraintlayout:constraintlayout:2.1.4")
-    testImplementation ("junit:junit:4.13.2")
-    androidTestImplementation ("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation ("androidx.test.espresso:espresso-core:3.4.0")
+    implementation(project(":network"))
+
+
+    // AndroidX Library
+    implementation (Libs.AndroidX.appcompat)
+    implementation (Libs.AndroidX.material)
+    implementation (Libs.AndroidX.constraintLayout)
+    implementation (Libs.AndroidX.recyclerview)
+    implementation (Libs.AndroidX.legacy)
+    implementation (Libs.AndroidX.Lifecycle.extensions)
+    implementation (Libs.AndroidX.Lifecycle.livedata)
+    implementation (Libs.AndroidX.Lifecycle.viewModel)
+    implementation (Libs.AndroidX.Lifecycle.java8)
+
+    // Navigation Component
+    implementation (Libs.AndroidX.Navigation.fragment)
+    implementation (Libs.AndroidX.Navigation.ui)
+
+
+    // Test
+    testImplementation (Libs.Test.junit)
+    androidTestImplementation (Libs.Test.junitExt)
+    androidTestImplementation (Libs.Test.espresso)
+
+    // rxjava
+    implementation (Libs.Reativex.rxjava)
+    implementation (Libs.AndroidX.Room.roomRxjava)
+
+    // multiDex
+    implementation (Libs.AndroidX.multiDex)
+
+    // Glide Libs
+    implementation (Libs.Glide.glide)
+    kapt (Libs.Glide.compiler)
+
 }
