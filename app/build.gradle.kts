@@ -4,6 +4,7 @@ plugins {
     id ("com.android.application")
     id ("org.jetbrains.kotlin.android")
     kotlin("kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -73,4 +74,12 @@ dependencies {
     implementation (Libs.Glide.glide)
     kapt (Libs.Glide.compiler)
 
+    //Hilt
+    implementation (Libs.Hilt.hilt)
+    kapt (Libs.Hilt.hiltCompiler)
+
+}
+
+kapt {
+    correctErrorTypes = true
 }

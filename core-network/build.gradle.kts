@@ -2,6 +2,8 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     kotlin("plugin.serialization") version "1.8.20"
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -60,7 +62,15 @@ dependencies {
     //coroutine
     implementation (Libs.Kotlin.coroutine)
 
+    //Hilt
+    implementation (Libs.Hilt.hilt)
+    kapt (Libs.Hilt.hiltCompiler)
+
     //Serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
 
+}
+
+kapt {
+    correctErrorTypes = true
 }

@@ -2,26 +2,31 @@ package com.jworld.androidbasic
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.jworld.network.reqres.datasource.UserNetworkDataSource
+import android.util.Log
+import com.jworld.core.data.user.repository.NetworkUserRepository
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    @Inject lateinit var networkUserRepository: NetworkUserRepository
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        GlobalScope.launch(Dispatchers.IO) {
-//            val dataSource : UserNetworkDataSource = UserNetworkDataSource()
-//            dataSource.getUsers()
-////            Log.d("yong1234","result : $result")
-//
-////            for(data in result){
-////                Log.d("yong1234","id : ${data.id}")
-////                Log.d("yong1234","avatar : ${data.avatar}")
-////                Log.d("yong1234","first_name : ${data.first_name}")
-////                Log.d("yong1234","last_name : ${data.last_name}")
-////            }
-//
-//        }
+        GlobalScope.launch(Dispatchers.IO) {
+
+            val userList = networkUserRepository.getUserList()
+            Log.d("yong1234","userList size : ${userList.size}")
+
+            for(data in userList){
+                Log.d("yong1234","id : ${data.id}")
+                Log.d("yong1234","fname : ${data.firstName}")
+                Log.d("yong1234","lname : ${data.lastName}")
+            }
+
+        }
     }
 }

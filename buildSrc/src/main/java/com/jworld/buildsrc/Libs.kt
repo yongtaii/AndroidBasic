@@ -105,4 +105,9 @@ object Libs {
     object FlexBox {
         const val flexBoxLayout = "com.google.android.flexbox:flexbox:3.0.0"
     }
+
+    object Hilt {
+        const val hilt = "com.google.dagger:hilt-android:2.44"
+        const val hiltCompiler = "com.google.dagger:hilt-android-compiler:2.44"
+    }
 }

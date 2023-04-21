@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.jworld.core.data"
+    namespace = "com.jworld.core.common"
     compileSdk = 33
 
     defaultConfig {
@@ -37,9 +37,6 @@ android {
 
 dependencies {
 
-    implementation(project(":core-network"))
-    implementation(project(":core-common"))
-
     // AndroidX Library
     implementation (Libs.AndroidX.appcompat)
     implementation (Libs.AndroidX.material)
@@ -49,10 +46,6 @@ dependencies {
     androidTestImplementation (Libs.Test.junitExt)
     androidTestImplementation (Libs.Test.espresso)
 
-    //coroutine
-    implementation (Libs.Kotlin.coroutine)
-
-//    implementation("androidx.core:core-ktx:1.7.0")
     //Hilt
     implementation (Libs.Hilt.hilt)
     kapt (Libs.Hilt.hiltCompiler)
