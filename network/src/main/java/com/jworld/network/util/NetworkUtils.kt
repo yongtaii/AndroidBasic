@@ -1,6 +1,7 @@
 package com.jworld.network.util
 
 import com.jworld.network.common.CommonError
+import com.jworld.network.common.data.ApiResponse
 import com.jworld.network.common.data.NetworkResponse
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -87,25 +88,26 @@ object NetworkUtils {
     /**
      * 네트워크 에러 에러 처리
      * */
-    fun receiveCargoDetail(response: retrofit2.Response<CargoDetailResponse>?): NetworkResponse {
+    fun processApiResponseError(response: retrofit2.Response<out ApiResponse>?): NetworkResponse {
+
         if (response == null) {
             return NetworkResponse ( NetworkConstants.RESULT_FAIL_CODE, CommonError.CODE_ERROR_UNKNOWN )
         }
 
         return when (response.code()) {
-            HttpURLConnection.HTTP_OK -> processReceiveResult(response)
-            else -> {
-                NetworkResponse(code = NetworkConstants.RESULT_FAIL_CODE, message = CommonError.CODE_ERROR_UNKNOWN)
-            }
+            HttpURLConnection.HTTP_OK -> processApiResponseValid(response)
+            else -> NetworkResponse(code = NetworkConstants.RESULT_FAIL_CODE, message = CommonError.CODE_ERROR_UNKNOWN)
         }
     }
+    /**
+     * 응답 유효성 확인
+     * */
+    private fun processApiResponseValid(response: retrofit2.Response<out ApiResponse>?): NetworkResponse {
+        val responseBody = response?.body()
 
-    private fun processReceiveResult(response: retrofit2.Response<T>?): NetworkResponse {
-        val cargoDetailResponse = response?.body()
-
-        if (cargoDetailResponse?.isValid() != true) {
+        if (responseBody?.isValid() != true) {
             return NetworkResponse(NetworkConstants.RESULT_FAIL_CODE, CommonError.CODE_EMPTY_DATA)
         }
-        return NetworkResponse(NetworkConstants.RESULT_SUCCESS_RECEIVE_DATA, message = response?.code().toString(), result = cargoDetailResponse)
+        return NetworkResponse(NetworkConstants.RESULT_SUCCESS_RECEIVE_DATA, message = response.code().toString(), result = responseBody)
     }
 }

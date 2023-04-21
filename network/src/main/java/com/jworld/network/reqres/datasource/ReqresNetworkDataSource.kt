@@ -1,7 +1,12 @@
 package com.jworld.network.reqres.datasource
 
+import android.util.Log
+import com.jworld.network.common.data.NetworkResponse
 import com.jworld.network.reqres.api.ReqresApiService
 import com.jworld.network.reqres.model.User
+import com.jworld.network.reqres.model.UsersResponse
+import com.jworld.network.reqres.model.asExternalModel
+import com.jworld.network.reqres.provider.UserData
 import com.jworld.network.util.NetworkApiCreator
 import com.jworld.network.util.NetworkUtils
 import com.jworld.network.util.SessionOptions
@@ -21,18 +26,17 @@ class ReqresNetworkDataSource : ReqresDataSource{
         reqresApiService = retrofit.create(ReqresApiService::class.java)
     }
 
-    override suspend fun getUsers(): Flow<List<User>> {
-        return flow {
-            emit(reqresApiService.getUsers())
-        }.map {
-//            NetworkUtils.throwUnAuthorizedExceptionIfNeed(it)
-            OrderResponse.CargoDetail.receiveCargoDetail(it)
-        }.map {
-            convertCargoDetailData(it)
-        }
+    suspend fun getUsers2() : NetworkResponse {
 
+        val apiResponse = reqresApiService.getUsers()
+//        val result1 = NetworkUtils.throwUnAuthorizedExceptionIfNeed(apiResponse)
+        val result2 = NetworkUtils.processApiResponseError(apiResponse)
+        val data = result2.result as UsersResponse
+        result2.result = data::asExternalModel
+        return result2
 
     }
 
-//    override suspend fun getUsers(): List<User> = reqresApiService.getUsers().data
+//    override suspend fun getUsers(): List<User> = reqresApiService.getUsers().body() ?: emptyList()
+    override suspend fun getUsers(): Response<UsersResponse> = reqresApiService.getUsers()
 }

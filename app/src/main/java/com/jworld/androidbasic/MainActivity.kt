@@ -14,13 +14,15 @@ class MainActivity : AppCompatActivity() {
 
         GlobalScope.launch(Dispatchers.IO) {
             val dataSource : ReqresNetworkDataSource = ReqresNetworkDataSource()
-            val result = dataSource.getUsers()
-            for(data in result){
-                Log.d("yong1234","id : ${data.id}")
-                Log.d("yong1234","avatar : ${data.avatar}")
-                Log.d("yong1234","first_name : ${data.first_name}")
-                Log.d("yong1234","last_name : ${data.last_name}")
-            }
+            dataSource.getUsers2()
+//            Log.d("yong1234","result : $result")
+
+//            for(data in result){
+//                Log.d("yong1234","id : ${data.id}")
+//                Log.d("yong1234","avatar : ${data.avatar}")
+//                Log.d("yong1234","first_name : ${data.first_name}")
+//                Log.d("yong1234","last_name : ${data.last_name}")
+//            }
 
         }
     }
