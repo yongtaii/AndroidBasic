@@ -2,9 +2,7 @@ package com.jworld.androidbasic
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.lifecycle.viewModelScope
-import com.jworld.network.reqres.datasource.ReqresNetworkDataSource
+import com.jworld.network.reqres.datasource.UserNetworkDataSource
 import kotlinx.coroutines.*
 
 class MainActivity : AppCompatActivity() {
@@ -13,7 +11,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         GlobalScope.launch(Dispatchers.IO) {
-            val dataSource : ReqresNetworkDataSource = ReqresNetworkDataSource()
+            val dataSource : UserNetworkDataSource = UserNetworkDataSource()
             dataSource.getUsers2()
 //            Log.d("yong1234","result : $result")
 

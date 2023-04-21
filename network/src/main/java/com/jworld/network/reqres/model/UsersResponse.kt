@@ -1,10 +1,7 @@
 package com.jworld.network.reqres.model
 
 import com.jworld.network.common.data.ApiResponse
-import com.jworld.network.reqres.provider.UserData
-import com.jworld.network.reqres.provider.UsersData
 import kotlinx.serialization.Serializable
-
 
 @Serializable
 data class UsersResponse(
@@ -17,14 +14,6 @@ data class UsersResponse(
 ) : ApiResponse {
     override fun isValid(): Boolean = true
 }
-
-fun UsersResponse.asExternalModel() = UsersData(
-    userList = data.map { it.asExternalModel() },
-    page = page,
-    perPage = per_page,
-    total = total,
-    totalPages = total_pages,
-)
 
 @Serializable
 data class Support(
@@ -39,14 +28,4 @@ data class User(
     val first_name: String,
     val id: Int,
     val last_name: String
-) : ApiResponse {
-    override fun isValid(): Boolean = id >= 0
-}
-
-fun User.asExternalModel() = UserData(
-    id = id,
-    firstName = first_name,
-    lastName = last_name,
-    emailAddress = email,
-    avatarImg = avatar,
 )
