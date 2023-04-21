@@ -1,14 +1,14 @@
-package com.jworld.network.reqres.provider
+package com.jworld.core.data.user.model
 
 data class UsersData(
-    val userList: List<UserData>,
+    val userList: List<User>,
     val page: Int,
     val perPage: Int,
     val total: Int,
     val totalPages: Int
 )
 
-data class UserData(
+data class User(
     val id: Int,
     val firstName: String,
     val lastName: String,

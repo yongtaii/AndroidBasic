@@ -38,7 +38,7 @@ android {
 
 dependencies {
 
-    implementation(project(":network"))
+    implementation(project(":core-data"))
 
 
     // AndroidX Library

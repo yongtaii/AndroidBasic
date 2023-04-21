@@ -14,4 +14,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "AndroidBasic"
 include (":app")
-include(":network")
+include(":core-network")
+include(":core-data")

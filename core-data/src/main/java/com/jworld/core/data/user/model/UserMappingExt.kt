@@ -1,9 +1,7 @@
-package com.jworld.network.reqres.util
+package com.jworld.core.data.user.model
 
 import com.jworld.network.reqres.model.User
 import com.jworld.network.reqres.model.UsersResponse
-import com.jworld.network.reqres.provider.UserData
-import com.jworld.network.reqres.provider.UsersData
 
 fun UsersResponse.toExternal() = UsersData(
     userList = data.toExternal(),
@@ -15,7 +13,7 @@ fun UsersResponse.toExternal() = UsersData(
 
 fun List<User>.toExternal() = map (User::toExternal)
 
-fun User.toExternal() = UserData(
+fun User.toExternal() = User(
     id = id,
     firstName = first_name,
     lastName = last_name,
