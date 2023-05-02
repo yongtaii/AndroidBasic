@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/userFragment"
+    android:id="@+id/nav_graph">
+
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.jworld.androidbasic.ui.main.UserFragment"
+        android:label="cargoListFragment"
+        tools:layout="@layout/fragment_user">
+    </fragment>
+
+</navigation>

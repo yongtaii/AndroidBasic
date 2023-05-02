@@ -3,6 +3,7 @@ package com.jworld.core.data.user.repository
 import com.jworld.core.common.di.ApplicationScope
 import com.jworld.core.common.di.DefaultDispatcher
 import com.jworld.core.data.common.NetworkException
+import com.jworld.core.data.common.RepoResponse
 import com.jworld.core.data.user.model.User
 import com.jworld.core.data.user.model.toExternal
 import com.jworld.network.reqres.UserNetworkDataSource
@@ -22,30 +23,30 @@ class NetworkUserRepository @Inject constructor(
     @ApplicationScope private val scope: CoroutineScope,
 ) : UserRepository {
 
-    override val userList: Flow<List<User>>
+//    override val userList: Flow<List<User>>
 
-    override suspend fun updateUserList() {
+//    override suspend fun updateUserList() {
+//
+//        return withContext(dispatcher) {
+//            val result = userNetworkDataSource.getUsers()
+//            if(result.code == NetworkConstants.RESULT_SUCCESS_RECEIVE_DATA){
+//                val resultData = userNetworkDataSource.getUsers().result as UsersResponse
+//                resultData.data.toExternal()
+//            }else{
+//                throw NetworkException(result.message)
+//            }
+//        }
+//    }
+
+    override suspend fun getUserList() : RepoResponse {
 
         return withContext(dispatcher) {
             val result = userNetworkDataSource.getUsers()
             if(result.code == NetworkConstants.RESULT_SUCCESS_RECEIVE_DATA){
                 val resultData = userNetworkDataSource.getUsers().result as UsersResponse
-                resultData.data.toExternal()
+                RepoResponse(isSuccess = true, errorCode = result.code, errorMsg = result.message, result = resultData.data.toExternal())
             }else{
-                throw NetworkException(result.message)
-            }
-        }
-    }
-
-    override suspend fun getUserList() : List<User> {
-
-        return withContext(dispatcher) {
-            val result = userNetworkDataSource.getUsers()
-            if(result.code == NetworkConstants.RESULT_SUCCESS_RECEIVE_DATA){
-                val resultData = userNetworkDataSource.getUsers().result as UsersResponse
-                resultData.data.toExternal()
-            }else{
-                throw NetworkException(result.message)
+                RepoResponse(isSuccess = false, errorCode = result.code, errorMsg = result.message)
             }
         }
     }

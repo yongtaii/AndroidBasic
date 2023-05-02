@@ -35,6 +35,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+    }
 }
 
 dependencies {
@@ -56,6 +60,9 @@ dependencies {
     // Navigation Component
     implementation (Libs.AndroidX.Navigation.fragment)
     implementation (Libs.AndroidX.Navigation.ui)
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
 
 
     // Test
@@ -77,6 +84,10 @@ dependencies {
     //Hilt
     implementation (Libs.Hilt.hilt)
     kapt (Libs.Hilt.hiltCompiler)
+
+    // Navigation Component
+    implementation (Libs.AndroidX.Navigation.fragment)
+    implementation (Libs.AndroidX.Navigation.ui)
 
 }
 
